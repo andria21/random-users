@@ -1,9 +1,14 @@
-import { TableContainer, Th, Tr, Caption } from "../table-body/table-body.module";
+import {
+  TableContainer,
+  Th,
+  Tr,
+  Caption,
+} from "../table-body/table-body.module";
 
 export default function TableHead({ children }) {
+  //       <Caption>Generated Users</Caption>
   return (
     <TableContainer>
-      <Caption>Generated Users</Caption>
       <thead>
         <Tr>
           <Th>ID</Th>

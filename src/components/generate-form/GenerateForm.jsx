@@ -12,6 +12,7 @@ import {
   UsersDiv,
   CSVcontainer,
   GeneralDiv,
+  HeaderDiv,
 } from "./generate-form.module";
 import { useEffect, useRef, useState } from "react";
 
@@ -66,16 +67,21 @@ export default function GenerateForm() {
 
   useEffect(() => {
     function handleScroll() {
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.scrollY;
-      if (windowHeight + scrollTop >= documentHeight && !loading) {
+      const usersDiv = document.querySelector("#usersDiv");
+      const divHeight = usersDiv.clientHeight;
+      const scrollHeight = usersDiv.scrollHeight;
+      const scrollTop = usersDiv.scrollTop;
+
+      if (divHeight + scrollTop >= scrollHeight && !loading) {
         generateUsers();
       }
     }
-    window.addEventListener("scroll", handleScroll);
+
+    const usersDiv = document.querySelector("#usersDiv");
+    usersDiv.addEventListener("scroll", handleScroll);
+
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      usersDiv.removeEventListener("scroll", handleScroll);
     };
   }, [loading, selectedCountry, users]);
 
@@ -164,15 +170,9 @@ export default function GenerateForm() {
 
   return (
     <GeneralDiv>
-      <CSVcontainer>
-        <Button type="button" onClick={exportToCSV}>
-          Export to CSV
-        </Button>
-      </CSVcontainer>
-
       <Container>
         <GenerateFormContainer>
-          <Title>Generate Users</Title>
+          <Title>Settings</Title>
           <Select
             name="countries"
             id="countries"
@@ -199,7 +199,7 @@ export default function GenerateForm() {
               value={errorCount}
               onChange={(e) => setErrorCount(parseFloat(e.target.value))}
             />
-            {errorCount <=10 ? errorCount : 10}
+            {errorCount <= 10 ? errorCount : 10}
           </Label>
 
           <br />
@@ -234,7 +234,16 @@ export default function GenerateForm() {
           </Button>
         </GenerateFormContainer>
       </Container>
-      <UsersDiv>
+      <CSVcontainer>
+        {users.length > 0 && (
+          <Button type="button" onClick={exportToCSV}>
+            Export to CSV
+          </Button>
+        )}
+      </CSVcontainer>
+      <HeaderDiv>{users.length > 0 && <h1>Generated Users</h1>}</HeaderDiv>
+
+      <UsersDiv id="usersDiv">
         {users.length > 0 && (
           <TableHead>
             {users.map((user, index) => (

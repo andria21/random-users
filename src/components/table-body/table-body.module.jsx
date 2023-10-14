@@ -6,7 +6,7 @@ export const Td = styled.td`
   border: 1px solid #191919;
   text-align: center;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
     display: block;
     &::before {
       content: attr(data-cell) ": ";
@@ -32,7 +32,7 @@ export const Td = styled.td`
 export const Th = styled.th`
   padding: 12px;
   border: 1px solid #191919;
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
     display: none;
   }
   /* @media (max-width: 1360px) {
@@ -52,7 +52,7 @@ export const TableContainer = styled.table`
   border-radius: 10px;
   margin-top: 10px;
   margin-bottom: 200px;
-  @media (max-width: 1360px) {
+  @media (max-width: 1400px) {
     word-break: break-all;
   }
 `;
@@ -91,6 +91,11 @@ export const CustomImage = styled(Image)`
   width: 100%;
   height: 100%;
   object-fit: cover;
+
+  @media (max-width: 900px) {
+    width: 100%;
+    object-fit: fill;
+  }
 `;
 
 export const Caption = styled.caption`
