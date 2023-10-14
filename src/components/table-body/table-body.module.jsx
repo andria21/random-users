@@ -32,6 +32,10 @@ export const Td = styled.td`
 export const Th = styled.th`
   padding: 12px;
   border: 1px solid #191919;
+  /* position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #000; */
   @media (max-width: 1000px) {
     display: none;
   }
@@ -52,7 +56,7 @@ export const TableContainer = styled.table`
   border-radius: 10px;
   margin-top: 10px;
   margin-bottom: 200px;
-  @media (max-width: 1400px) {
+  @media (max-width: 1530px) {
     word-break: break-all;
   }
 `;

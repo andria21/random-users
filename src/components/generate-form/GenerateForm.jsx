@@ -85,6 +85,10 @@ export default function GenerateForm() {
     };
   }, [loading, selectedCountry, users]);
 
+  useEffect(() => {
+    loadUsers();
+  }, [selectedCountry, seed, errorCount]);
+
   const generateUsers = async () => {
     if (loading) return;
     setLoading(true);
@@ -229,19 +233,15 @@ export default function GenerateForm() {
               onChange={(e) => setSeed(e.target.value)}
             />
           </Label>
-          <Button type="button" onClick={() => loadUsers()}>
-            Generate
-          </Button>
         </GenerateFormContainer>
+        <CSVcontainer>
+          {users.length > 0 && (
+            <Button type="button" onClick={exportToCSV}>
+              Export to CSV
+            </Button>
+          )}
+        </CSVcontainer>
       </Container>
-      <CSVcontainer>
-        {users.length > 0 && (
-          <Button type="button" onClick={exportToCSV}>
-            Export to CSV
-          </Button>
-        )}
-      </CSVcontainer>
-      <HeaderDiv>{users.length > 0 && <h1>Generated Users</h1>}</HeaderDiv>
 
       <UsersDiv id="usersDiv">
         {users.length > 0 && (
@@ -255,3 +255,5 @@ export default function GenerateForm() {
     </GeneralDiv>
   );
 }
+
+// <HeaderDiv>{users.length > 0 && <h1>Generated Users</h1>}</HeaderDiv>

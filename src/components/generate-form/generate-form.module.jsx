@@ -24,14 +24,14 @@ export const Select = styled.select`
 
 export const GenerateFormContainer = styled.form`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  gap: 40px;
+  gap: 10px;
   padding: 40px;
   width: 100%;
-  max-width: 1400px;
+  max-width: 300px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background: #191919;
@@ -99,9 +99,9 @@ export const SliderInput = styled.input`
 `;
 
 export const Container = styled.div`
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 `;
 
 export const UsersDiv = styled.div`
@@ -110,11 +110,11 @@ export const UsersDiv = styled.div`
   align-items: center;
   gap: 20px; */
   width: 100%;
-  max-width: 1500px;
+  max-width: 1600px;
   margin: 0 auto;
   overflow-x: auto;
   max-height: 800px;
-  margin-bottom: 200px;
+
   @media (max-width: 1000px) {
     width: 100%;
     max-width: 460px;
@@ -130,12 +130,15 @@ export const CSVcontainer = styled.div`
 `;
 
 export const GeneralDiv = styled.div`
+  display: flex;
   width: 100%;
+  justify-content: space-between;
 
   @media (max-width: 1000px) {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
+    gap: 30px;
   }
 `;
 
