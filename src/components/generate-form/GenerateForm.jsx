@@ -118,35 +118,40 @@ export default function GenerateForm() {
   };
 
   const introduceErrors = (user, errorCount) => {
-    const randomNumber = Math.random();
+    for (let i = 0; i < errorCount; i++) {
+      const randomNumber = Math.random();
 
-    if (randomNumber < errorCount) {
-      const insertIndex = Math.floor(Math.random() * errorCount);
-      const randomCharacter = String.fromCharCode(
-        65 + Math.floor(Math.random() * 26)
-      );
-      user.phone =
-        user.phone.slice(0, insertIndex) +
-        randomCharacter +
-        user.phone.slice(insertIndex);
-      user.name.first =
-        user.name.first.slice(0, insertIndex) +
-        randomCharacter +
-        user.name.first.slice(insertIndex);
-      user.name.last =
-        user.name.last.slice(0, insertIndex) +
-        randomCharacter +
-        user.name.last.slice(insertIndex);
-      const swapIndex1 = Math.floor(Math.random() * errorCount);
-      const swapIndex2 = Math.floor(Math.random() * errorCount);
-      const countryArray = user.location.country.split("");
-      [countryArray[swapIndex1], countryArray[swapIndex2]] = [
-        countryArray[swapIndex2],
-        countryArray[swapIndex1],
-      ];
-      user.location.country = countryArray.join("");
+      if (randomNumber < errorCount) {
+        for (const key in user) {
+          if (user.hasOwnProperty(key) && typeof user[key] === "string") {
+            const field = user[key];
+            const errorType = Math.random() < errorCount ? "insert" : "swap";
+            if (errorType === "insert") {
+              const insertIndex = Math.floor(Math.random() * field.length);
+              const randomCharacter = String.fromCharCode(
+                65 + Math.floor(Math.random() * 26)
+              );
+              user[key] =
+                field.slice(0, insertIndex) +
+                randomCharacter +
+                field.slice(insertIndex);
+            } else {
+              const swapIndex1 = Math.floor(Math.random() * field.length);
+              const swapIndex2 = Math.floor(Math.random() * field.length);
+              const fieldArray = field.split("");
+              [fieldArray[swapIndex1], fieldArray[swapIndex2]] = [
+                fieldArray[swapIndex2],
+                fieldArray[swapIndex1],
+              ];
+              user[key] = fieldArray.join("");
+            }
+            if (user[key].length > 20) {
+              user[key] = user[key].slice(0, 20);
+            }
+          }
+        }
+      }
     }
-
     return user;
   };
 
